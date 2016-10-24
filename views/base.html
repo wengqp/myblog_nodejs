@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ title }}</title>
+    <script src="/static/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/vue.js"></script>
+    <script src="/static/js/vue-resource.min.js"></script>
+    <style>
+        .left {
+            background-color: #F5F5F5;
+            padding-bottom: 50%;
+        }
+        .top {
+            text-align: center;
+            margin: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="left col-md-3">
+                <div class="top container-fluid">
+                    <a href="/"><img src="/static/img/avatar.jpg" alt="avatar" class="img-circle" width="80" height="80"></a>
+                    <h4><strong>哈骑士的博客</strong></h4>
+                    <h5><small>「 勇士渴望什么 」</small></h5>
+                </div>
+                <div class="mid container-fluid">
+                    <nav class="nav">
+                        <ul class="nav nav-stacked">
+                            <li class="active"><a href="/">首页</a></li>
+                            <li><a href="/about">关于</a></li>
+                            <li><a href="/image">哲学</a></li>
+                            <li>
+                                <form action="/search" method="post">
+                                    <input type="search" results="5" placeholder="搜索关键词">
+                                </form>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-md-9">
+                {% block main %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

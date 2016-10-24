@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block main %}
+<script>
+
+$(function () {
+var vm = new Vue({
+    el: '#vm',
+    data: {
+        isDisabled: false,
+        isActive: true,
+        blogs: [],
+        page: {}
+    },
+    created: function () {
+        this.init();
+    },
+    methods: {
+        init: function () {
+            var that = this;
+            that.$resource('/api/blog').get().then(function (resp) {
+                resp.json().then(function (rs) {
+                    that.blogs = rs.blogs;
+                    that.page = rs.page;
+                })
+            }, function (resp) {
+                alert('error');
+            });
+        }
+    }
+});
+window.vm = vm;
+})
+
+</script>
+
+<div class="col-md-9" id="vm">
+    <article class="article" v-for="blog of blogs"> 
+        <h2><a href="#" v-text="blog.name"></a></h2>
+        <p>发表于<span class="article-meta" v-text="blog.created_at"></span></p>
+        <p v-text="blog.summary"></p>
+        <p><a href="#">继续阅读</a></p>
+    </article>
+
+    <nav id="pagination">
+        <ul class="pagination">
+            <li v-bind:class="{ disabled: isDisabled, active: isActive}"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&gt;</a></li>
+        </ul>
+    </nav>
+</div>
+
+{% endblock %}
